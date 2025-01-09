@@ -36,8 +36,8 @@ export interface IChildDept {
 
 export interface IAPIresponse {
     message: string,
-    result : boolean,
-    data:any
+    result: boolean,
+    data: any
 }
 
 export interface Project {
@@ -49,5 +49,26 @@ export interface Project {
     contactPerson: string,
     contactNo: string,
     emailId: string,
-    employeeName:string
-  }
+    employeeName: string
+}
+
+export class ProjectEmployee {
+    empProjectId: number;
+    projectId: number;
+    empId: number;
+    assignedDate: string;
+    role: string;
+    isActive: boolean;
+    projectName?:string;
+    employeeName?:string;
+    
+    constructor() {
+        this.empProjectId = 0;
+        this.projectId=0;
+        this.empId=0;
+        this.assignedDate="";
+        this.role="";
+        this.isActive=false;
+    }
+}
+

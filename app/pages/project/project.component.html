@@ -108,20 +108,72 @@
 </div>
 
 <div class="modal" #myModal>
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
   
         <div class="modal-header">
           <h4 class="modal-title">Project Employee</h4>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          <button type="button" class="btn-close" (click)="CLoseModal()"></button>
         </div>
   
         <div class="modal-body">
-          Modal body..
+          <div class="row pb-2">
+            <div class="col-3">
+                <select class="form-select" name="" id="" [(ngModel)]="projectwmployee.empId">
+                    <option value="0" selected>Select Employee</option>
+                    <option *ngFor="let item of employeeData$ |async" [value]="item.employeeId">{{item.employeeName}}</option>
+                </select>
+            </div>
+            <div class="col-3">
+                <input class="form-control" placeholder="Role" type="text" [(ngModel)]="projectwmployee.role">
+            </div>
+            <div class="col-3">
+                <input type="date" class="form-control" [(ngModel)]="projectwmployee.assignedDate">
+            </div>
+            <div class="col-3">
+                <input type="button" class="btn btn-primary" (click)="OnProjectEmployeeSave()" value="Add">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+                <table class="table table-bordered fs-6">
+                    <thead>
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Employee Name</th>
+                            <th>Is Active</th>
+                            <th>Role</th>
+                            <th>Assign Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                       <ng-container *ngIf="projectEmpList.length == 0">
+                        <tr>
+                            <td colspan="5">
+                                No Employee Add Yet 
+                            </td>
+                        </tr>
+                       </ng-container>
+                       <ng-container *ngIf="projectEmpList.length !== 0">
+                        <tr *ngFor="let item of projectEmpList;">
+                            <td>{{item.projectName}}</td>
+                            <td>{{item.employeeName}}</td>
+                            <td>{{item.isActive}}</td>
+                            <td>{{item.role}}</td>
+                            <td>{{item.assignedDate| date:'dd-MM-yyyy'}}</td> 
+                     </tr>         
+                       </ng-container> 
+
+                                     
+                    </tbody>
+                </table>
+            </div>
+          </div>
         </div>
   
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" (click)="CLoseModal()">Close</button>
         </div>
   
       </div>

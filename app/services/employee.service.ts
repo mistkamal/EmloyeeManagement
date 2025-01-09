@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Employee, IAPIresponse, Project } from '../model/Employee';
+import { Employee, IAPIresponse, Project, ProjectEmployee } from '../model/Employee';
 import { Observable } from 'rxjs';
 
 
@@ -32,6 +32,7 @@ export class EmployeeService {
   //#endregion
 
   //#region Project
+
   creatNewproject(empobj:Project) {
     return this.http.post<Project>(`${this.apiUrl}CreateProject`,empobj);
   }
@@ -47,5 +48,17 @@ export class EmployeeService {
   deleteproject(id:number) {
     return this.http.delete<Project>(this.apiUrl + "DeleteProject/"+id);
   }
+  //#endregion
+
+  //#region projectEmployee
+
+  creatNewprojectEmployee(empobj:ProjectEmployee) {
+    return this.http.post<ProjectEmployee>(`${this.apiUrl}CreateProjectEmployee`,empobj);
+  }
+
+  getprojectemployee() {
+    return this.http.get<ProjectEmployee[]>(this.apiUrl + "GetAllProjectEmployees");
+  }
+
   //#endregion
 }
